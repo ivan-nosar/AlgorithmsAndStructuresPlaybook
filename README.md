@@ -2,7 +2,7 @@
 
 This repository contains implementations of most of the basic algorithms and data structures that
 can be useful for preparing for a technical interview. The implementations are accompanied by
-comments and illustrations that explain in detail every aspect of the algorithm’s operation and
+comments and illustrations that explain in detail every aspect of the algorithm's operation and
 are also covered with unit tests.
 
 ## Getting started
@@ -22,17 +22,17 @@ Summaries of various topics, including data structures, sorting algorithms, bina
   * Deque
   * Heap
   * Binary search trees
-	* RedBlack tree
-	* AVL tree
+    * RedBlack tree
+    * AVL tree
   * HashTable
 * Algorithms
   * Sorting
-	* Insertion sort
-	* Quick sort
-	* Merge sort
-	* Heap sort
-	* Shell sort
-	* Introsort
-	* Block sort
-	* Tim sort
+    * Insertion sort
+    * Quick sort
+    * Merge sort
+    * Heap sort
+    * Shell sort
+    * Introsort
+    * Block sort
+    * Tim sort
   * Binary search

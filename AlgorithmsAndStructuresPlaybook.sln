@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgorithmsAndStructuresPlaybook", "AlgorithmsAndStructuresPlaybook\AlgorithmsAndStructuresPlaybook.csproj", "{884100C8-BEBD-4781-B4E2-AD74CF453598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsAndStructuresPlaybookTests", "AlgorithmsAndStructuresPlaybookTests\AlgorithmsAndStructuresPlaybookTests.csproj", "{C66C41A0-4FC5-4505-87B8-3CAB1F20CE65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsAndStructuresPlaybook.Tests", "AlgorithmsAndStructuresPlaybookTests\AlgorithmsAndStructuresPlaybook.Tests.csproj", "{C66C41A0-4FC5-4505-87B8-3CAB1F20CE65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

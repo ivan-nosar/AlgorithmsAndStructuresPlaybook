@@ -12,8 +12,15 @@
         const int DEFAULT_CAPACITY = 10;
         const int GROWTH_RATE = 2;
 
+        private int _capacity;
         private int[] Storage { get; set; }
-        private int Capacity { get; set; }
+
+        public int Capacity
+        {
+            get => _capacity;
+            // Protect capacity value from going non-positive
+            private set => _capacity = Math.Max(1, value);
+        }
         public int Count { get; private set; }
 
         /// <summary>
@@ -86,7 +93,7 @@
         /// Thrown when the <paramref name="index"/> is a non-positive number or
         /// exceeds the number of values stored in a collection
         /// </exception>
-        public void RemoveAtIndex(int index)
+        public void RemoveFromIndex(int index)
         {
             ValidateIndexInBounds(index);
 
@@ -125,7 +132,11 @@
         /// </exception>
         public void InsertAtIndex(int index, int value)
         {
-            ValidateIndexInBounds(index);
+            if (index != Count)
+            {
+                // Handle edge-case: It is possible to insert in the tail of list if there is no gap
+                ValidateIndexInBounds(index);
+            }
 
             if (Count == Capacity)
             {

@@ -25,4 +25,7 @@ To execute tests and build the test coverage report use the following script:
 
 ```pwsh
 ./scripts/run-tests-with-coverage.ps1
+
+# Or include '-OpenTestReport' parameter to automatically open HTML report in default browser
+./scripts/run-tests-with-coverage.ps1 -OpenTestReport
 ```

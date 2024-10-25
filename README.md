@@ -1,5 +1,7 @@
 # Algorithms & DataStructures playbook
 
+![Github Actions Build](https://github.com/ivan-nosar/AlgorithmsAndStructuresPlaybook/actions/workflows/dotnet-ci.yml/badge.svg)
+
 This repository contains implementations of most of the basic algorithms and data structures that
 can be useful for preparing for a technical interview. The implementations are accompanied by
 comments and illustrations that explain in detail every aspect of the algorithm's operation and

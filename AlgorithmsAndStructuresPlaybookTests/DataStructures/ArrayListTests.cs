@@ -1,5 +1,4 @@
 ﻿using AlgorithmsAndStructuresPlaybook.DataStructures.ArrayList;
-using System;
 
 namespace AlgorithmsAndStructuresPlaybookTests.DataStructures
 {

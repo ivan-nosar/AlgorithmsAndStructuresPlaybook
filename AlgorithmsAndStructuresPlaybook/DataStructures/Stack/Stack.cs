@@ -78,7 +78,7 @@ namespace AlgorithmsAndStructuresPlaybook.DataStructures.Stack
 
             Count--;
 
-            return Storage[Count + 1];
+            return Storage[Count];
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace AlgorithmsAndStructuresPlaybook.DataStructures.Stack
                 throw new InvalidOperationException("Stack is empty");
             }
 
-            return Storage[Count];
+            return Storage[Count - 1];
         }
 
         /// <summary>

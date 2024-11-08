@@ -152,7 +152,7 @@
             }
 
             // Short-handed form of loop above:
-            // Array.Copy(Storage, index, Storage, index + 1, Count - index);
+            // Array.Copy(Storage, index, Storage, index + 1, Count - index - 1);
 
             Storage[index] = value;
         }

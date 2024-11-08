@@ -1,6 +1,6 @@
 ﻿using AlgorithmsAndStructuresPlaybook.DataStructures.ArrayList;
 
-namespace AlgorithmsAndStructuresPlaybookTests.DataStructures
+namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 {
     [TestClass]
     public class ArrayListTests

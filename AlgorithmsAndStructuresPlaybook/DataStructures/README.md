@@ -29,3 +29,7 @@ essential aspects of implementation without sacrificing generality.
   value; In turn, they usually store tree data in a flat array that keeps parent-children
   relationships by element indices (`0` element is a root, `1-2` elements - are children of the
   root, `3-4` - are children of `1`, and so on).
+* **Absence of foolproof measures**: The goal of this demo project is to focus on algorithms.
+  It is not intended to support all real-life production use cases. Therefore, many built-in foolproof
+  measures that typically prevent user errors were intentionally omitted. This decision was made to
+  keep the source code of the examples clear and focused on their purpose.

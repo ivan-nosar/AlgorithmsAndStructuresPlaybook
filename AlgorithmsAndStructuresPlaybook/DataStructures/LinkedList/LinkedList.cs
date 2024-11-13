@@ -27,6 +27,8 @@
                 throw new ArgumentNullException("New node is null");
             }
 
+            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+
             var second = First;
 
             First = newNode;
@@ -51,6 +53,8 @@
             {
                 throw new ArgumentNullException("New node is null");
             }
+
+            // Production-ready implementation must ensure that newNode doesn't belong to the list already
 
             var penultimate = Last;
 
@@ -81,6 +85,8 @@
                 throw new ArgumentNullException("New node is null");
             }
 
+            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+
             var previous = node.Previous;
 
             if (previous != null)
@@ -91,6 +97,11 @@
 
             newNode.Next = node;
             node.Previous = newNode;
+
+            if (node == First)
+            {
+                First = newNode;
+            }
 
             Count++;
         }
@@ -106,6 +117,8 @@
                 throw new ArgumentNullException("New node is null");
             }
 
+            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+
             var next = node.Next;
 
             node.Next = newNode;
@@ -115,6 +128,11 @@
             {
                 next.Previous = newNode;
                 newNode.Next = next;
+            }
+
+            if (node == Last)
+            {
+                Last = newNode;
             }
 
             Count++;
@@ -144,6 +162,8 @@
             {
                 throw new ArgumentNullException("Node is null");
             }
+
+            // Production-ready implementation must ensure that node actually belong to the list
 
             var next = node.Next;
             var previous = node.Previous;

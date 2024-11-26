@@ -26,14 +26,17 @@
             {
                 throw new ArgumentNullException("New node is null");
             }
-
-            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+            if (newNode.List != null)
+            {
+                throw new InvalidOperationException("The node already belongs to a LinkedList");
+            }
 
             var second = First;
 
             First = newNode;
             First.Previous = null;
             First.Next = second;
+            First.List = this;
 
             if (second != null)
             {
@@ -53,14 +56,17 @@
             {
                 throw new ArgumentNullException("New node is null");
             }
-
-            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+            if (newNode.List != null)
+            {
+                throw new InvalidOperationException("The node already belongs to a LinkedList");
+            }
 
             var penultimate = Last;
 
             Last = newNode;
             Last.Previous = penultimate;
             Last.Next = null;
+            Last.List = this;
 
             if (penultimate != null)
             {
@@ -84,8 +90,18 @@
             {
                 throw new ArgumentNullException("New node is null");
             }
-
-            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+            if (node == newNode)
+            {
+                throw new InvalidOperationException("Both nodes provided refer to one object");
+            }
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("The node doesn't belong to the current instance of a LinkedList");
+            }
+            if (newNode.List != null)
+            {
+                throw new InvalidOperationException("The new node already belongs to a LinkedList");
+            }
 
             var previous = node.Previous;
 
@@ -97,6 +113,7 @@
 
             newNode.Next = node;
             node.Previous = newNode;
+            newNode.List = this;
 
             if (node == First)
             {
@@ -116,13 +133,24 @@
             {
                 throw new ArgumentNullException("New node is null");
             }
-
-            // Production-ready implementation must ensure that newNode doesn't belong to the list already
+            if (node == newNode)
+            {
+                throw new InvalidOperationException("Both nodes provided refer to one object");
+            }
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("The node doesn't belong to the current instance of a LinkedList");
+            }
+            if (newNode.List != null)
+            {
+                throw new InvalidOperationException("The new node already belongs to a LinkedList");
+            }
 
             var next = node.Next;
 
             node.Next = newNode;
             newNode.Previous = node;
+            newNode.List = this;
 
             if (next != null)
             {
@@ -147,6 +175,7 @@
 
                 current.Next = null;
                 current.Previous = null;
+                current.List = null;
 
                 current = next;
             }
@@ -162,8 +191,10 @@
             {
                 throw new ArgumentNullException("Node is null");
             }
-
-            // Production-ready implementation must ensure that node actually belong to the list
+            if (node.List != this)
+            {
+                throw new InvalidOperationException("The node doesn't belong to the current instance of a LinkedList");
+            }
 
             var next = node.Next;
             var previous = node.Previous;
@@ -190,6 +221,7 @@
 
             node.Next = null;
             node.Previous = null;
+            node.List = null;
 
             Count--;
         }
@@ -217,14 +249,16 @@
         public class Node
         {
             public int Value { get; private set; }
+            public LinkedList? List { get; internal set; }
             public Node? Previous { get; internal set; }
             public Node? Next { get; internal set; }
 
-            public Node(int value, Node? previous = null, Node? next = null)
+            public Node(int value, LinkedList? list = null, Node? previous = null, Node? next = null)
             {
                 Value = value;
                 Previous = previous;
                 Next = next;
+                List = list;
             }
         }
     }

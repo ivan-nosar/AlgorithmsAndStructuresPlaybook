@@ -1,4 +1,5 @@
 ﻿using AlgorithmsAndStructuresPlaybook.DataStructures.LinkedList;
+using System.Collections.Generic;
 
 namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 {
@@ -39,6 +40,27 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             Assert.AreEqual(expectedCount, linkedList.Count);
         }
 
+        [TestMethod]
+        public void AddFirst_NodeBelongsToList_Failure()
+        {
+            // Arrange
+            var linkedList = new LinkedList();
+            var node = new LinkedList.Node(100);
+            linkedList.AddFirst(node);
+
+            var otherLinkedList = new LinkedList();
+            var otherNode = new LinkedList.Node(200);
+            otherLinkedList.AddFirst(otherNode);
+
+            // Act & Assert
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddFirst(node));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddFirst(otherNode));
+
+            var expectedCount = 1;
+            Assert.AreEqual(expectedCount, linkedList.Count);
+            Assert.AreEqual(expectedCount, otherLinkedList.Count);
+        }
+
         [DataTestMethod]
         [DataRow(new int[0], new int[] { -10, -1, 0, 1, 10 })]
         [DataRow(new int[] { 1, 2, 3 }, new int[] { -10, -1, 3, 4, 10 })]
@@ -73,6 +95,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
 
+                Assert.AreEqual(linkedList, currentNode.List);
+
                 currentNode = currentNode.Next;
             }
 
@@ -83,6 +107,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
+
+                Assert.AreEqual(linkedList, currentNode.List);
 
                 currentNode = currentNode.Next;
             }
@@ -116,6 +142,27 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 
             var expectedCount = initialData.Length;
             Assert.AreEqual(expectedCount, linkedList.Count);
+        }
+
+        [TestMethod]
+        public void AddLast_NodeBelongsToList_Failure()
+        {
+            // Arrange
+            var linkedList = new LinkedList();
+            var node = new LinkedList.Node(100);
+            linkedList.AddFirst(node);
+
+            var otherLinkedList = new LinkedList();
+            var otherNode = new LinkedList.Node(200);
+            otherLinkedList.AddFirst(otherNode);
+
+            // Act & Assert
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddLast(node));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddLast(otherNode));
+
+            var expectedCount = 1;
+            Assert.AreEqual(expectedCount, linkedList.Count);
+            Assert.AreEqual(expectedCount, otherLinkedList.Count);
         }
 
         [DataTestMethod]
@@ -152,6 +199,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
 
+                Assert.AreEqual(linkedList, currentNode.List);
+
                 currentNode = currentNode.Next;
             }
 
@@ -162,6 +211,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
+
+                Assert.AreEqual(linkedList, currentNode.List);
 
                 currentNode = currentNode.Next;
             }
@@ -189,7 +240,7 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             LinkedList.Node? invalidNode = null;
-            var listNode =linkedList.First;
+            var listNode = linkedList.First;
 
             // Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => linkedList.AddBefore(invalidNode!, listNode!));
@@ -198,6 +249,47 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 
             var expectedCount = initialData.Length;
             Assert.AreEqual(expectedCount, linkedList.Count);
+        }
+
+        [TestMethod]
+        public void AddBefore_NodeBelongsToList_Failure()
+        {
+            // Arrange
+            var linkedList = new LinkedList();
+            var node1 = new LinkedList.Node(100);
+            var node2 = new LinkedList.Node(150);
+            linkedList.AddFirst(node1);
+            linkedList.AddFirst(node2);
+
+            var otherLinkedList = new LinkedList();
+            var otherNode1 = new LinkedList.Node(200);
+            var otherNode2 = new LinkedList.Node(250);
+            otherLinkedList.AddFirst(otherNode1);
+            otherLinkedList.AddFirst(otherNode2);
+
+            var newNode1 = new LinkedList.Node(300);
+            var newNode2 = new LinkedList.Node(350);
+
+            // Act & Assert
+            // Ensure validation of pivot node: it should belong to the list
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(otherNode1, node1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(otherNode1, otherNode2));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(otherNode1, newNode1));
+
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(newNode1, node1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(newNode1, otherNode1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(newNode1, newNode2));
+
+            // Ensure validation of new node: it shouldn't belong to any list
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(node1, node2));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(node1, otherNode1));
+
+            // Ensure nodes are not referring the same object
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddBefore(node1, node1));
+
+            var expectedCount = 2;
+            Assert.AreEqual(expectedCount, linkedList.Count);
+            Assert.AreEqual(expectedCount, otherLinkedList.Count);
         }
 
         [DataTestMethod]
@@ -255,6 +347,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
 
+                Assert.AreEqual(linkedList, currentNode.List);
+
                 currentNode = currentNode.Next;
             }
 
@@ -290,6 +384,47 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
 
             var expectedCount = initialData.Length;
             Assert.AreEqual(expectedCount, linkedList.Count);
+        }
+
+        [TestMethod]
+        public void AddAfter_NodeBelongsToList_Failure()
+        {
+            // Arrange
+            var linkedList = new LinkedList();
+            var node1 = new LinkedList.Node(100);
+            var node2 = new LinkedList.Node(150);
+            linkedList.AddFirst(node1);
+            linkedList.AddFirst(node2);
+
+            var otherLinkedList = new LinkedList();
+            var otherNode1 = new LinkedList.Node(200);
+            var otherNode2 = new LinkedList.Node(250);
+            otherLinkedList.AddFirst(otherNode1);
+            otherLinkedList.AddFirst(otherNode2);
+
+            var newNode1 = new LinkedList.Node(300);
+            var newNode2 = new LinkedList.Node(350);
+
+            // Act & Assert
+            // Ensure validation of pivot node: it should belong to the list
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(otherNode1, node1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(otherNode1, otherNode2));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(otherNode1, newNode1));
+
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(newNode1, node1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(newNode1, otherNode1));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(newNode1, newNode2));
+
+            // Ensure validation of new node: it shouldn't belong to any list
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(node1, node2));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(node1, otherNode1));
+
+            // Ensure nodes are not referring the same object
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.AddAfter(node1, node1));
+
+            var expectedCount = 2;
+            Assert.AreEqual(expectedCount, linkedList.Count);
+            Assert.AreEqual(expectedCount, otherLinkedList.Count);
         }
 
         [DataTestMethod]
@@ -347,6 +482,8 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
                 var actulaItem = currentNode.Value;
                 Assert.AreEqual(expectedItem, actulaItem);
 
+                Assert.AreEqual(linkedList, currentNode.List);
+
                 currentNode = currentNode.Next;
             }
 
@@ -389,6 +526,7 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             {
                 Assert.IsNull(item.Next);
                 Assert.IsNull(item.Previous);
+                Assert.IsNull(item.List);
             }
         }
 
@@ -416,6 +554,30 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             Assert.AreEqual(expectedCount, linkedList.Count);
         }
 
+        [TestMethod]
+        public void Remove_NodeDoesntBelongToList_Failure()
+        {
+            // Arrange
+            var linkedList = new LinkedList();
+            var node1 = new LinkedList.Node(100);
+            var node2 = new LinkedList.Node(150);
+            linkedList.AddFirst(node1);
+            linkedList.AddFirst(node2);
+
+            var otherLinkedList = new LinkedList();
+            var otherNode = new LinkedList.Node(200);
+            otherLinkedList.AddFirst(otherNode);
+
+            var newNode = new LinkedList.Node(300);
+
+            // Act & Assert
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.Remove(newNode));
+            Assert.ThrowsException<InvalidOperationException>(() => linkedList.Remove(otherNode));
+
+            var expectedCount = 2;
+            Assert.AreEqual(expectedCount, linkedList.Count);
+        }
+
         [DataTestMethod]
         [DataRow(new int[] { 1, 2, 3 })]
         [DataRow(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })]
@@ -439,9 +601,11 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             // Act
-            linkedList.Remove(linkedList.First!);
+            var firstDeletedNode = linkedList.First!;
+            linkedList.Remove(firstDeletedNode);
             linkedList.Remove(nodeInMiddle!);
-            linkedList.Remove(linkedList.Last!);
+            var lastDeletedNode = linkedList.Last!;
+            linkedList.Remove(lastDeletedNode);
 
             // Assert
             var currentNode = linkedList.First;
@@ -470,6 +634,19 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             Assert.IsNull(currentNode);
+
+            // Ensure references in nodes were removed
+            Assert.IsNull(firstDeletedNode.Previous);
+            Assert.IsNull(firstDeletedNode.Next);
+            Assert.IsNull(firstDeletedNode.List);
+
+            Assert.IsNull(nodeInMiddle!.Previous);
+            Assert.IsNull(nodeInMiddle!.Next);
+            Assert.IsNull(nodeInMiddle!.List);
+
+            Assert.IsNull(lastDeletedNode.Previous);
+            Assert.IsNull(lastDeletedNode.Next);
+            Assert.IsNull(lastDeletedNode.List);
 
             // Ensure the length of linked list
             var expectedCount = expectedItems.Count;
@@ -507,6 +684,7 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             // Act
+            var firstDeletedNode = linkedList.First!;
             linkedList.RemoveFirst();
 
             // Assert
@@ -528,6 +706,11 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             Assert.IsNull(currentNode);
+
+            // Ensure references in nodes were removed
+            Assert.IsNull(firstDeletedNode.Previous);
+            Assert.IsNull(firstDeletedNode.Next);
+            Assert.IsNull(firstDeletedNode.List);
 
             // Ensure the length of linked list
             var expectedCount = expectedItems.Count;
@@ -565,6 +748,7 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             // Act
+            var lastDeletedNode = linkedList.Last!;
             linkedList.RemoveLast();
 
             // Assert
@@ -586,6 +770,11 @@ namespace AlgorithmsAndStructuresPlaybook.Tests.DataStructures
             }
 
             Assert.IsNull(currentNode);
+
+            // Ensure references in nodes were removed
+            Assert.IsNull(lastDeletedNode.Previous);
+            Assert.IsNull(lastDeletedNode.Next);
+            Assert.IsNull(lastDeletedNode.List);
 
             // Ensure the length of linked list
             var expectedCount = expectedItems.Count;

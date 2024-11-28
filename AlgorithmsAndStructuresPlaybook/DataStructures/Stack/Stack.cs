@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace AlgorithmsAndStructuresPlaybook.DataStructures.Stack
+﻿namespace AlgorithmsAndStructuresPlaybook.DataStructures.Stack
 {
     /// <summary>
     /// Stack is an abstract data type that serves as a collection of elements with two main operations:

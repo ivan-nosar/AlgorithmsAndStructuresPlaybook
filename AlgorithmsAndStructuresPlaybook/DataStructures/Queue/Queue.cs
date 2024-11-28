@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AlgorithmsAndStructuresPlaybook.DataStructures.Queue
+﻿namespace AlgorithmsAndStructuresPlaybook.DataStructures.Queue
 {
     /// <summary>
     /// Queue is an abstract data type that are maintained in a sequence and can be modified by the addition
